@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="theGuides" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>The Guides</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/registration_login.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<div class="navbar-fixed">
+  <nav class="red darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Guides</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Partners</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul> 
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>
+  <h3 class = "center"> User Registration </h3>
+  <div class="row registration-login-form" >
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <input id="age" type="number" class="validate">
+            <label for="age">Age</label>
+        </div>
+        <div class="input-field col s6">
+                <input id="sex" type="text" class="validate">
+                <label for="sex">Sex</label>
+            </div>
+      </div>
+      <div class="row">
+            <div class="input-field col s12">
+              <textarea id="address" class="materialize-textarea"></textarea>
+              <label for="address">Interests</label>
+            </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="icon_telephone" type="tel" class="validate">
+          <label for="icon_telephone">Contact Number</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="address" class="materialize-textarea"></textarea>
+          <label for="address">Current Residence Address</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <form action="#">
+            <div class="file-field input-field">
+              <div class="btn red darken-4">
+                <span>Upload your Picture</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+    </form>
+    <div class="row">
+        <div class="input-field col s12">
+                <button class="btn red darken-4" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>        
+        </div>
+    </div>
+    </form>
+  </div>
+
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="js/app.js"></script>
+
+  </body>
+</html>
