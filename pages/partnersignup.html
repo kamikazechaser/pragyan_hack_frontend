@@ -12,55 +12,55 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
+            <input id="first_name" type="text" ng-model="first_name" class="validate">
             <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
+          <input id="last_name" type="text" ng-model="last_name" class="validate">
           <label for="last_name">Last Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-            <input id="age" type="number" class="validate">
+            <input id="age" type="number" ng-model="age" class="validate">
             <label for="age">Age</label>
         </div>
         <div class="input-field col s6">
-                <input id="sex" type="text" class="validate">
+                <input id="sex" type="text" ng-model="sex" class="validate">
                 <label for="sex">Sex</label>
             </div>
       </div>
       <div class="row">
             <div class="input-field col s12">
-              <textarea id="address" class="materialize-textarea"></textarea>
-              <label for="address">Languages Known</label>
+              <textarea id="languages" ng-model="languages" class="materialize-textarea"></textarea>
+              <label for="languages">Languages Known</label>
             </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="email" type="email" class="validate">
+          <input id="email" type="email" ng-model="email" class="validate">
           <label for="email">Email</label>
         </div>
         <div class="input-field col s6">
-          <input id="icon_telephone" type="tel" class="validate">
+          <input id="icon_telephone" type="tel" ng-model="telephone" class="validate">
           <label for="icon_telephone">Contact Number</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="address" class="materialize-textarea"></textarea>
+          <textarea id="address" class="materialize-textarea" ng-model="address"></textarea>
           <label for="address">Current Residence Address</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input id="password" type="password" ng-model="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
     <div class="center row">
         <div class="input-field col s12">
-                <button class="btn-large red darken-4" type="submit" name="action">Submit
+                <button class="btn-large red darken-4" type="submit" ng-click="subReg()" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>        
         </div>
