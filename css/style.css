@@ -21,3 +21,11 @@ th{
 .inline-icon{
   vertical-align:bottom;
 }
+
+#autocomplete-search-input{
+  font-size: 20px;
+}
+.input-field input[type=text]:focus {
+     border-bottom: 1px solid red !important;
+     box-shadow: 0 1px 0 0 red !important;
+   }
