@@ -93,7 +93,7 @@ theGuides.controller("partnerSignupController", function($scope, $http) {
         const languages = $scope.languages;
         const phone = $scope.phone;
         const sex = $scope.sex;
-        $http.get(`http://127.0.0.1:3000/registerpartner?email=${email}&firstName=${firstName}&${lastName}password=${password}&age=${age}&address=${address}&languages=${languages}&phone=${phone}&sex=${sex}`)
+        $http.get(`http://127.0.0.1:3000/registerpartner?email=${email}&firstName=${firstName}&${lastName}&password=${password}&age=${age}&address=${address}&languages=${languages}&phone=${phone}&sex=${sex}`)
             .then((ctx) => {
                 console.log("OK");
                 //const statusCode = ctx.data.status;
