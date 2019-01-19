@@ -12,3 +12,12 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+th{
+  font-size: 20px;
+  color:#c62828;
+}
+
+.inline-icon{
+  vertical-align:bottom;
+}
