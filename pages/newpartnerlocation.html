@@ -7,7 +7,7 @@
                 <label for="location_name">Location name</label>
             </div>
             <div class="input-field col s6">
-                <input id="image" type="text" ng-model="image" ng-model="image"" class=" validate">
+                <input id="image" type="text" ng-model="image" ng-model="image" class=" validate">
                 <label for="image">Image URL</label>
             </div>
         </div>
@@ -41,15 +41,17 @@
         var popup = L.popup()
         .setLatLng(popLocation)
         .setContent('Location selected')
-        .openOn(map);       
+        .openOn(map);
     })
+
+    
 </script>
         </div>
 
         <div class="row">
             <div class="input-field col s12">
                 <input id="cost" type="number" ng-model="cost" class="validate">
-                <label for="age">Cost</label>
+                <label for="cost">Cost</label>
             </div>
             <div class="input-field col s12">
                 <textarea ng-model="description" id="description" class="materialize-textarea"></textarea>

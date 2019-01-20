@@ -1,0 +1,42 @@
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h3 class="header center black-text">My Bookings</h3>
+    </div>
+  </div>
+
+<div class="container">
+<div class="section">
+      <table class=" highlight centered responsive-table">
+       <thead>
+         <tr>
+             <th>Tour Name</th>
+             <th>Tour Guides</th>
+             <th>Price</th>
+             <th>Status of Booking</th>
+             <th> Date and Time</th>
+         </tr>
+       </thead>
+
+       <tbody ng-repeat="item in data">
+
+         <tr ng-init="myVar={{item.confirmedStatus}}">
+           <td>{{item.locationName}}</td>
+           <td>{{item.partner}}</td>
+           <td>{{item.price}}</td>
+           <td ng-show="myVar">Confirmed<i class="material-icons small inline-icon">check</i></td>
+           <td ng-hide="!myVar">Cancelled<i class="material-icons small inline-icon">close</i></td>
+           <td>{{item.date}}, {{item.time}}</td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+<br>

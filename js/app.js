@@ -53,10 +53,19 @@ theGuides.config(function ($routeProvider) {
         .when("/newlocation", {
             templateUrl: "pages/newpartnerlocation.html",
             controller: "newLocationController",
-        })                   
+        })
         .when("/partnerlogin", {
             templateUrl: "pages/partnerlogin.html",
             controller: "partnerLoginController",
+        })
+        .when("/newpartnerlocation", {
+            templateUrl: "pages/newpartnerlocation.html",
+            controller: "newPartnerLocationController",
+        })
+
+        .when("/clientbookinghistory" ,{
+            templateUrl : "pages/booking.html",
+            controller:"clientBookingHistory",
         });
 });
 
@@ -102,7 +111,7 @@ theGuides.controller("partnerSignupController", function($scope, $http, $locatio
 
                 toastr.success(message);
                 $location.path("/partnerlogin");
-                
+
             })
             .catch((error) => {
                 console.error(error);
@@ -110,7 +119,7 @@ theGuides.controller("partnerSignupController", function($scope, $http, $locatio
         }
 });
 
-theGuides.controller("clientLoginController", function($scope, $http) {
+theGuides.controller("clientLoginController", function($scope, $http,$location) {
   $scope.subLogin = function () {
        const email = $scope.email;
        const password = $scope.password;
@@ -122,6 +131,7 @@ theGuides.controller("clientLoginController", function($scope, $http) {
 
               if (statusCode === 200) {
                   toastr.success(message);
+                  console.log("success");
                   $location.path("/clientdashboard");
               }
           })
@@ -131,7 +141,7 @@ theGuides.controller("clientLoginController", function($scope, $http) {
     }
 });
 
-theGuides.controller("partnerLoginController", function($scope, $http) {
+theGuides.controller("partnerLoginController", function($scope, $http, $location) {
   $scope.subLogin = function () {
       const email = $scope.email;
       const password = $scope.password;
@@ -154,6 +164,61 @@ theGuides.controller("partnerLoginController", function($scope, $http) {
     }
 });
 
+theGuides.controller("newPartnerLocationController", function($scope, $http, $location) {
+  $scope.subNewLoc = function () {
+      const cost = $scope.cost;
+      const description = $scope.description;
+      const email ="sandhya@gmail.com"; //to be taken from local storage
+      const x_loc = 13;//$scope.pop
+      const y_loc = 80;
+      const url = "images@image.com";
+      // TODO:
+      console.log("got values");
+
+      $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&cost=${cost}&description=${description}&x_loc=${x_loc}&y_loc=${y_loc}&url=${url}`)
+          .then((ctx) => {
+              const message = ctx.data.message;
+              const statusCode = ctx.data.status;
+
+              if (statusCode === 200) {
+                  toastr.success(message);
+                  $location.path("/partnerdashboard");
+              } else {
+                  toastr.error(message);
+              }
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+    }
+});
+
+theGuides.controller("clientDashboardController", function($scope, $http, $location) {
+  $scope.openBookings = function () {
+      const email ="sandhya@gmail.com"; //to be taken from local storage
+      $http.get(`http://127.0.0.1:3000/clientbookinghistory?email=${email}`)
+          .then((ctx) => {
+              const message = ctx.data.message;
+              const statusCode = ctx.data.status;
+
+              if (statusCode === 200) {
+                  toastr.success(message);
+                  $location.path("/clientbookinghistory");
+              } else {
+                  toastr.error(message);
+              }
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+    }
+});
+
+theGuides.controller("partnerDashboardController", function($scope, $http, $location) {
+  $scope.addNewPartnerLocation = function () {
+                  $location.path("/newpartnerlocation");
+      }
+});
 
 theGuides.controller("homeController", function ($scope, $http) {
     $scope.home = {};
