@@ -58,11 +58,6 @@ theGuides.config(function ($routeProvider) {
             templateUrl: "pages/partnerlogin.html",
             controller: "partnerLoginController",
         })
-        .when("/newpartnerlocation", {
-            templateUrl: "pages/newpartnerlocation.html",
-            controller: "newPartnerLocationController",
-        })
-
         .when("/clientbookinghistory" ,{
             templateUrl : "pages/booking.html",
             controller:"clientBookingHistory",
@@ -203,7 +198,7 @@ theGuides.controller("clientDashboardController", function($scope, $http, $locat
 
 theGuides.controller("partnerDashboardController", function($scope, $http, $location) {
   $scope.addNewPartnerLocation = function () {
-                  $location.path("/newpartnerlocation");
+                  $location.path("/newlocation");
       }
 });
 
@@ -220,13 +215,18 @@ theGuides.controller("homeController", function ($scope, $http) {
     }
 });
 
-theGuides.controller("newLocationController", function ($scope, $window) {
+theGuides.controller("newLocationController", function ($scope, $window, $http, $location) {
 
     $scope.subNewLoc = function () {
         const lat = $window.lat;
         const lon = $window.lon;
+        const email = getFromStore('email');
+        const description = $scope.description;
+        const cost = $scope.cost;
+        const image = $scope.image;
+        
 
-        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?=${email}&password=${password}`)
+        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&url=image&x_loc=${lat}&y_loc=${lon}&description=${description}&cost=${cost}&url=${url}`)
             .then((ctx) => {
                 const message = ctx.data.message;
                 const statusCode = ctx.data.status;
