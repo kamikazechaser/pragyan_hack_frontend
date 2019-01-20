@@ -223,9 +223,10 @@ theGuides.controller("newLocationController", function ($scope, $window, $http, 
         const email = getFromStore('email');
         const description = $scope.description;
         const cost = $scope.cost;
-        const url = $scope.url;
+        const image = $scope.image;
+        
 
-        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&x_loc=${lat}&y_loc=${lon}&description=${description}&cost=${cost}&url=${url}`)
+        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&url=image&x_loc=${lat}&y_loc=${lon}&description=${description}&cost=${cost}&url=${url}`)
             .then((ctx) => {
                 const message = ctx.data.message;
                 const statusCode = ctx.data.status;
