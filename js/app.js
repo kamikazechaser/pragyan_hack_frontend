@@ -57,6 +57,15 @@ theGuides.config(function ($routeProvider) {
         .when("/partnerlogin", {
             templateUrl: "pages/partnerlogin.html",
             controller: "partnerLoginController",
+        })
+        .when("/newpartnerlocation", {
+            templateUrl: "pages/newpartnerlocation.html",
+            controller: "newPartnerLocationController",
+        })
+
+        .when("/clientbookinghistory" ,{
+            templateUrl : "pages/booking.html",
+            controller:"clientBookingHistory",
         });
 });
 
@@ -169,6 +178,32 @@ theGuides.controller("partnerLoginController", function ($scope, $http) {
     }
 });
 
+theGuides.controller("clientDashboardController", function($scope, $http, $location) {
+  $scope.openBookings = function () {
+      const email ="sandhya@gmail.com"; //to be taken from local storage
+      $http.get(`http://127.0.0.1:3000/clientbookinghistory?email=${email}`)
+          .then((ctx) => {
+              const message = ctx.data.message;
+              const statusCode = ctx.data.status;
+
+              if (statusCode === 200) {
+                  toastr.success(message);
+                  $location.path("/clientbookinghistory");
+              } else {
+                  toastr.error(message);
+              }
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+    }
+});
+
+theGuides.controller("partnerDashboardController", function($scope, $http, $location) {
+  $scope.addNewPartnerLocation = function () {
+                  $location.path("/newpartnerlocation");
+      }
+});
 
 theGuides.controller("homeController", function ($scope, $http) {
     $scope.home = {};
