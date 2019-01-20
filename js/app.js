@@ -128,7 +128,7 @@ theGuides.controller("partnerSignupController", function ($scope, $http, $locati
     }
 });
 
-theGuides.controller("clientLoginController", function ($scope, $http) {
+theGuides.controller("clientLoginController", function ($scope, $http, $location, $window) {
     $scope.subLogin = function () {
         const email = $scope.email;
         const password = $scope.password;
@@ -144,6 +144,7 @@ theGuides.controller("clientLoginController", function ($scope, $http) {
                     pushToStore("email", email);
                     pushToStore("partner", false);
                     $location.path("/clientdashboard");
+                    $window.location.reload();
                 }
             })
             .catch((error) => {
@@ -152,7 +153,7 @@ theGuides.controller("clientLoginController", function ($scope, $http) {
     }
 });
 
-theGuides.controller("partnerLoginController", function ($scope, $http) {
+theGuides.controller("partnerLoginController", function ($scope, $http, $location, $window) {
     $scope.subLogin = function () {
         const email = $scope.email;
         const password = $scope.password;
@@ -168,6 +169,7 @@ theGuides.controller("partnerLoginController", function ($scope, $http) {
                     pushToStore("email", email);
                     pushToStore("partner", true);
                     $location.path("/partnerdashboard");
+                    $window.location.reload();
                 } else {
                     toastr.error(message);
                 }
@@ -180,7 +182,7 @@ theGuides.controller("partnerLoginController", function ($scope, $http) {
 
 theGuides.controller("clientDashboardController", function($scope, $http, $location) {
   $scope.openBookings = function () {
-      const email ="sandhya@gmail.com"; //to be taken from local storage
+      const email = getFromStore("email");
       $http.get(`http://127.0.0.1:3000/clientbookinghistory?email=${email}`)
           .then((ctx) => {
               const message = ctx.data.message;
