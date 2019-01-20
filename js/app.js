@@ -42,15 +42,26 @@ theGuides.config(function ($routeProvider) {
             templateUrl: "pages/partnersignup.html",
             controller: "partnerSignupController",
         })
+        .when("/partnerdashboard", {
+            templateUrl: "pages/partnerdashboard.html",
+            controller: "partnerDashboardController",
+        })
+        .when("/clientdashboard", {
+            templateUrl: "pages/clientdashboard.html",
+            controller: "clientDashboardController",
+        })
+        .when("/newlocation", {
+            templateUrl: "pages/newpartnerlocation.html",
+            controller: "newLocationController",
+        })                   
         .when("/partnerlogin", {
             templateUrl: "pages/partnerlogin.html",
             controller: "partnerLoginController",
         });
 });
 
-theGuides.controller("clientSignupController", function($scope, $http) {
+theGuides.controller("clientSignupController", function($scope, $http, $location) {
     $scope.subReg = function () {
-        // omegalul
         const firstName = $scope.first_name;
         const lastName = $scope.last_name;
         const email = $scope.email;
@@ -60,30 +71,22 @@ theGuides.controller("clientSignupController", function($scope, $http) {
         const interests = $scope.interests;
         const phone = $scope.phone;
         const sex = $scope.sex;
-        $http.get(`http://127.0.0.1:3000/registerclient?email=${email}&firstName=${firstName}&${lastName}password=${password}&age=${age}&address=${address}&interests=${interests}&phone=${phone}&sex=${sex}`)
-            .then((ctx) => {
-                console.log("OK");
-                //const statusCode = ctx.data.status;
-              //  const message = ctx.data.message;
 
-                if (statusCode === 200) {
-                    //toastr.success(message);
-                    //$location.path("/login");
-                } else {
-                    //toastr.error(message);
-                }
+        $http.get(`http://127.0.0.1:3000/registerclient?email=${email}&name=${firstName} ${lastName}&password=${password}&age=${age}&address=${address}&interests=${interests}&phone=${phone}&sex=${sex}`)
+            .then((ctx) => {
+                const message = ctx.data.message;
+
+                toastr.success(message);
+                $location.path("/clientlogin");
             })
             .catch((error) => {
                 console.error(error);
-                //let error = ctx.data;
-                //toastr.error(error);
             });
-    }
+        }
 });
 
-theGuides.controller("partnerSignupController", function($scope, $http) {
+theGuides.controller("partnerSignupController", function($scope, $http, $location) {
     $scope.subReg = function () {
-        // omegalul
         const firstName = $scope.first_name;
         const lastName = $scope.last_name;
         const email = $scope.email;
@@ -93,85 +96,62 @@ theGuides.controller("partnerSignupController", function($scope, $http) {
         const languages = $scope.languages;
         const phone = $scope.phone;
         const sex = $scope.sex;
-        $http.get(`http://127.0.0.1:3000/registerpartner?email=${email}&firstName=${firstName}&${lastName}&password=${password}&age=${age}&address=${address}&languages=${languages}&phone=${phone}&sex=${sex}`)
+        $http.get(`http://127.0.0.1:3000/registerpartner?email=${email}&name=${firstName} ${lastName}&password=${password}&age=${age}&address=${address}&languages=${languages}&phone=${phone}&sex=${sex}`)
             .then((ctx) => {
-                console.log("OK");
-                //const statusCode = ctx.data.status;
-              //  const message = ctx.data.message;
+                const message = ctx.data.message;
 
-                if (statusCode === 200) {
-                    //toastr.success(message);
-                    //$location.path("/login");
-                } else {
-                    //toastr.error(message);
-                }
+                toastr.success(message);
+                $location.path("/partnerlogin");
+                
             })
             .catch((error) => {
                 console.error(error);
-                //let error = ctx.data;
-                //toastr.error(error);
             });
-    }
+        }
 });
 
 theGuides.controller("clientLoginController", function($scope, $http) {
   $scope.subLogin = function () {
-      // omegalul
-
        const email = $scope.email;
        const password = $scope.password;
 
-
       $http.get(`http://127.0.0.1:3000/loginclient?email=${email}&password=${password}`)
           .then((ctx) => {
-              console.log("OK");
-              //const statusCode = ctx.data.status;
-            //  const message = ctx.data.message;
+              const statusCode = ctx.data.status;
+              const message = ctx.data.message;
 
               if (statusCode === 200) {
-                  //toastr.success(message);
-                  //$location.path("/login");
-              } else {
-                  //toastr.error(message);
+                  toastr.success(message);
+                  $location.path("/clientdashboard");
               }
           })
           .catch((error) => {
               console.error(error);
-              //let error = ctx.data;
-              //toastr.error(error);
           });
-
-}
+    }
 });
 
 theGuides.controller("partnerLoginController", function($scope, $http) {
   $scope.subLogin = function () {
-      // omegalul
       const email = $scope.email;
       const password = $scope.password;
 
-
-
       $http.get(`http://127.0.0.1:3000/loginpartner?email=${email}&password=${password}`)
           .then((ctx) => {
-              console.log("OK");
-              //const statusCode = ctx.data.status;
-            //  const message = ctx.data.message;
+              const message = ctx.data.message;
+              const statusCode = ctx.data.status;
 
               if (statusCode === 200) {
-                  //toastr.success(message);
-                  //$location.path("/login");
+                  toastr.success(message);
+                  $location.path("/partnerdashboard");
               } else {
-                  //toastr.error(message);
+                  toastr.error(message);
               }
           })
           .catch((error) => {
               console.error(error);
-              //let error = ctx.data;
-              //toastr.error(error);
           });
-}
-
+    }
 });
 
 
@@ -187,3 +167,8 @@ theGuides.controller("homeController", function ($scope, $http) {
         });
     }
 });
+
+theGuides.controller("newLocationController", function ($scope, $http) {
+    console.log($scope.popLocation);
+    //
+})

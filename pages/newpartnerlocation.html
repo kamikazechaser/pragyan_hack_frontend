@@ -1,0 +1,67 @@
+<h3 class="center"> New Location </h3>
+<div class="row registration-login-form">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="location_name" type="text" ng-model="location_name" class="validate">
+                <label for="location_name">Location name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="image" type="text" ng-model="image" ng-model="image"" class=" validate">
+                <label for="image">Image URL</label>
+            </div>
+        </div>
+        <div class="center row">
+            <h4>Choose location on map:</h4><br>
+            <div id="map"></div>
+
+            <script>
+                const apiKey = "827ff99d0e44dd";
+    const chennaiLocation = [13.080806, 80.222934];
+
+    const streets = L.tileLayer.Unwired({
+        key: apiKey,
+        scheme: "streets"
+    });
+
+    const map = L.map("map", {
+        center: chennaiLocation,
+        zoom: 13,
+        layers: [streets]
+    });
+
+    L.control.scale().addTo(map);
+
+    L.control.layers({
+        "Streets": streets
+    }).addTo(map);
+
+    map.on("click", (e) => {
+        var popLocation= e.latlng;
+        var popup = L.popup()
+        .setLatLng(popLocation)
+        .setContent('Location selected')
+        .openOn(map);       
+    })
+</script>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="cost" type="number" ng-model="cost" class="validate">
+                <label for="age">Cost</label>
+            </div>
+            <div class="input-field col s12">
+                <textarea ng-model="description" id="description" class="materialize-textarea"></textarea>
+                <label for="description">Detailed Tour Description</label>
+            </div>
+        </div>
+        <div class="center row">
+            <div class="input-field col s12">
+                <button class="btn-large red darken-4" type="submit" ng-click="subNewLoc()" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
