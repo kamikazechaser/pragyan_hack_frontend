@@ -53,14 +53,23 @@ theGuides.config(function ($routeProvider) {
         .when("/newlocation", {
             templateUrl: "pages/newpartnerlocation.html",
             controller: "newLocationController",
-        })                   
+        })
         .when("/partnerlogin", {
             templateUrl: "pages/partnerlogin.html",
             controller: "partnerLoginController",
         });
 });
 
-theGuides.controller("clientSignupController", function($scope, $http, $location) {
+theGuides.controller("headerController", function ($scope, $window, $location) {
+    $scope.status = getFromStore("signed_in")
+    $scope.signOut = function () {
+        clearStore()
+        $window.location.reload();
+        $location.path("/")
+    }
+});
+
+theGuides.controller("clientSignupController", function ($scope, $http, $location) {
     $scope.subReg = function () {
         const firstName = $scope.first_name;
         const lastName = $scope.last_name;
@@ -82,10 +91,10 @@ theGuides.controller("clientSignupController", function($scope, $http, $location
             .catch((error) => {
                 console.error(error);
             });
-        }
+    }
 });
 
-theGuides.controller("partnerSignupController", function($scope, $http, $location) {
+theGuides.controller("partnerSignupController", function ($scope, $http, $location) {
     $scope.subReg = function () {
         const firstName = $scope.first_name;
         const lastName = $scope.last_name;
@@ -102,55 +111,61 @@ theGuides.controller("partnerSignupController", function($scope, $http, $locatio
 
                 toastr.success(message);
                 $location.path("/partnerlogin");
-                
+
             })
             .catch((error) => {
                 console.error(error);
             });
-        }
-});
-
-theGuides.controller("clientLoginController", function($scope, $http) {
-  $scope.subLogin = function () {
-       const email = $scope.email;
-       const password = $scope.password;
-
-      $http.get(`http://127.0.0.1:3000/loginclient?email=${email}&password=${password}`)
-          .then((ctx) => {
-              const statusCode = ctx.data.status;
-              const message = ctx.data.message;
-
-              if (statusCode === 200) {
-                  toastr.success(message);
-                  $location.path("/clientdashboard");
-              }
-          })
-          .catch((error) => {
-              console.error(error);
-          });
     }
 });
 
-theGuides.controller("partnerLoginController", function($scope, $http) {
-  $scope.subLogin = function () {
-      const email = $scope.email;
-      const password = $scope.password;
+theGuides.controller("clientLoginController", function ($scope, $http) {
+    $scope.subLogin = function () {
+        const email = $scope.email;
+        const password = $scope.password;
 
-      $http.get(`http://127.0.0.1:3000/loginpartner?email=${email}&password=${password}`)
-          .then((ctx) => {
-              const message = ctx.data.message;
-              const statusCode = ctx.data.status;
+        $http.get(`http://127.0.0.1:3000/loginclient?email=${email}&password=${password}`)
+            .then((ctx) => {
+                const statusCode = ctx.data.status;
+                const message = ctx.data.message;
 
-              if (statusCode === 200) {
-                  toastr.success(message);
-                  $location.path("/partnerdashboard");
-              } else {
-                  toastr.error(message);
-              }
-          })
-          .catch((error) => {
-              console.error(error);
-          });
+                if (statusCode === 200) {
+                    toastr.success(message);
+                    pushToStore("signed_in", true);
+                    pushToStore("email", email);
+                    pushToStore("partner", false);
+                    $location.path("/clientdashboard");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+});
+
+theGuides.controller("partnerLoginController", function ($scope, $http) {
+    $scope.subLogin = function () {
+        const email = $scope.email;
+        const password = $scope.password;
+
+        $http.get(`http://127.0.0.1:3000/loginpartner?email=${email}&password=${password}`)
+            .then((ctx) => {
+                const message = ctx.data.message;
+                const statusCode = ctx.data.status;
+
+                if (statusCode === 200) {
+                    toastr.success(message);
+                    pushToStore("signed_in", true);
+                    pushToStore("email", email);
+                    pushToStore("partner", true);
+                    $location.path("/partnerdashboard");
+                } else {
+                    toastr.error(message);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 });
 
@@ -168,7 +183,28 @@ theGuides.controller("homeController", function ($scope, $http) {
     }
 });
 
-theGuides.controller("newLocationController", function ($scope, $http) {
-    console.log($scope.popLocation);
-    //
+theGuides.controller("newLocationController", function ($scope, $window) {
+
+    $scope.subNewLoc = function () {
+        const lat = $window.lat;
+        const lon = $window.lon;
+
+        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?=${email}&password=${password}`)
+            .then((ctx) => {
+                const message = ctx.data.message;
+                const statusCode = ctx.data.status;
+
+                if (statusCode === 200) {
+                    toastr.success(message);
+                    $location.path("/partnerdashboard");
+                } else {
+                    toastr.error(message);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+
+    }
 })
