@@ -226,7 +226,7 @@ theGuides.controller("newLocationController", function ($scope, $window, $http, 
         const image = $scope.image;
         
 
-        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&url=image&x_loc=${lat}&y_loc=${lon}&description=${description}&cost=${cost}&url=${url}`)
+        $http.get(`http://127.0.0.1:3000/subnewpartnerlocation?email=${email}&url=${image}&x_loc=${lat}&y_loc=${lon}&description=${description}&cost=${cost}`)
             .then((ctx) => {
                 const message = ctx.data.message;
                 const statusCode = ctx.data.status;
