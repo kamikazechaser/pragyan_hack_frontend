@@ -203,16 +203,13 @@ theGuides.controller("partnerDashboardController", function($scope, $http, $loca
 });
 
 theGuides.controller("homeController", function ($scope, $http) {
-    $scope.home = {};
-
-    $scope.searchLocation = function () {
-        $http.get(`http://photon.komoot.de/api/?q=${$scope.home.autocomplete}`).then(response => {
-            const responseArray = response.data.features;
-            $scope.items = responseArray.splice(0, 5);
-        }).catch(error => {
-            console.error(error);
-        });
-    }
+    $http.get(`http://127.0.0.1:3000/guidelocations`)
+    .then((ctx) => {
+        $scope.cards = ctx.data;
+    })
+    .catch((error) => {
+        console.error(error);
+    });    
 });
 
 theGuides.controller("newLocationController", function ($scope, $window, $http, $location) {
