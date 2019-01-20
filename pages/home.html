@@ -10,23 +10,17 @@
       <div class="card">
         <div class="card-image">
           <img src="{{card.location_cover_image}}" height="144px" width="350px">
-          <button class="btn-floating halfway-fab waves-effect waves-light green btn" data-targert="modal{{card._id}}"><i class="material-icons">arrow_forward</i></button>
-
-            <!-- Modal Structure -->
-  <div id="modal{{card._id}}" class="modal">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-      </div>
-              
+          <button class="btn-floating halfway-fab activator waves-effect waves-light green btn" data-targert="modal{{card._id}}"><i class="material-icons">arrow_forward</i></button>              
         </div>
         <div class="card-content">
           <p>{{ card.location_description }}</p>
         </div>
+        <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{card.name}}<i class="material-icons right">close</i></span>
+                <p><b>Price: </b>{{card.guide_fees}}<br><b>Languages: </b>{{card.languages}}<br>
+                    <b>Rating: </b>5/10
+                </p>                
+                <a class="waves-effect center waves-light btn-small">Book Now!</a>
       </div>
     </div>
   </div>
