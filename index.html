@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <header>
+<header ng-controller="headerController">
 <div class="navbar-fixed">
   <nav class="red darken-4" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Guides</a>
@@ -21,6 +21,7 @@
           <li><a href="/#!/clientsignup">Sign up</a></li>
         <li><a href="/#!/clientlogin">Log in</a></li>
         <li><a href="/#!/partnersignup">Partners</a></li>
+        <li><button ng-cloak ng-show="status" ng-click="signOut()" class="waves-effect waves-light btn yellow darken-1">LOG OUT</button></li>
       </ul>
     </div>
   </nav>

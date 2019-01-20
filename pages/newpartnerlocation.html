@@ -37,11 +37,14 @@
     }).addTo(map);
 
     map.on("click", (e) => {
-        var popLocation= e.latlng;
-        var popup = L.popup()
+        const popLocation = e.latlng;
+        const popup = L.popup()
         .setLatLng(popLocation)
         .setContent('Location selected')
         .openOn(map);
+
+        lat = popLocation.lat;
+        lon = popLocation.lng;
     })
 
     
